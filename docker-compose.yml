@@ -1,0 +1,11 @@
+services:
+  birthdaybot:
+    image: dricephd/discord-birthdaybot
+    restart: no
+    env_file:
+      - .env
+    environment:
+      - TZ=America/New_York
+    build:
+      dockerfile: dockerfile
+      no_cache: true
