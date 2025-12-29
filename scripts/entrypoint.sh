@@ -33,3 +33,5 @@ if [ -n "$BIRTHDAY" ];then
 else
     echo "No Birthday :("
 fi
+
+exit 0
