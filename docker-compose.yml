@@ -1,6 +1,6 @@
 services:
   birthdaybot:
-    image: dricephd/discord-birthdaybot
+    image: lexi-blanchet/discord-birthdaybot
     restart: no
     env_file:
       - .env
