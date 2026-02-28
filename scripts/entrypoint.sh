@@ -7,6 +7,7 @@ curl -s -o "birthdays.ics" "$CALENDAR"
 
 ICS_FILE="birthdays.ics"
 TARGETDATE=$(date +"%m%d")
+GREPDATE="${TARGETDATE}T"
 
 if [ ! -f "$ICS_FILE" ]; then
     echo "Error: ICS file not found."
@@ -21,7 +22,7 @@ BIRTHDAY=$(gawk -F: '
         if ($1 == "DTSTART;VALUE=DATE") printf "%d ", $2
         if ($1 == "SUMMARY") print $2
     }
-' $ICS_FILE | grep $TARGETDATE)
+' $ICS_FILE | grep $GREPDATE)
 
 if [ -n "$BIRTHDAY" ];then 
     echo "$BIRTHDAY"
