@@ -30,7 +30,7 @@ if [ -n "$BIRTHDAY" ];then
     MESSAGE_CONTENT="Wow! I'm Birthday Ambassador Donnie Yen of good wishes and fortune. Today is $(date +"%A %B %e") and $NAME's Birthday!🎂"
     PAYLOAD="{\"content\": \"$MESSAGE_CONTENT\"}"
     echo $PAYLOAD
-    #curl -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
+    curl -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
 else
     echo "No Birthday :("
 fi
