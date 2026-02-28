@@ -7,7 +7,7 @@ curl -s -o "birthdays.ics" "$CALENDAR"
 
 ICS_FILE="birthdays.ics"
 TARGETDATE=$(date +"%m%d")
-GREPDATE="${TARGETDATE}T"
+GREPDATE="[0-9]{4}${TARGETDATE}"
 
 if [ ! -f "$ICS_FILE" ]; then
     echo "Error: ICS file not found."
@@ -22,7 +22,7 @@ BIRTHDAY=$(gawk -F: '
         if ($1 == "DTSTART;VALUE=DATE") printf "%d ", $2
         if ($1 == "SUMMARY") print $2
     }
-' $ICS_FILE | grep $GREPDATE)
+' $ICS_FILE | grep -E $GREPDATE)
 
 if [ -n "$BIRTHDAY" ];then 
     echo "$BIRTHDAY"
@@ -30,7 +30,7 @@ if [ -n "$BIRTHDAY" ];then
     MESSAGE_CONTENT="Wow! I'm Birthday Ambassador Donnie Yen of good wishes and fortune. Today is $(date +"%A %B %e") and $NAME's Birthday!🎂"
     PAYLOAD="{\"content\": \"$MESSAGE_CONTENT\"}"
     echo $PAYLOAD
-    curl -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
+    #curl -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
 else
     echo "No Birthday :("
 fi
